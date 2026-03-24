@@ -80,7 +80,24 @@ V-dlp will parse a file and attempt to download each one at a time.
 - [ ] Remove dependency on external start of Chrome Driver
 - [ ] Click on ads
 - [ ] OS agnostic (heavily Windows based as they need the most hand holding)
+- [ ] Get # links
 
 ## Bonus
 
 Powershell script to extract zips, delete zips, convert .cue, .gdi, .iso to .chd. `chd.ps1`
+
+## Example executions
+
+Create a list for all Atari2600 games.
+
+```
+python links.py --platform Atari2600 --letter all -f atari26roms.txt
+```
+
+Download the games.
+
+```
+python dlp.py -nm True -uh True -tw 1 -u atari26roms.txt
+```
+
+**NOTE**: if you are using the release, substitute "V-dlp" for "python dlp.py".
