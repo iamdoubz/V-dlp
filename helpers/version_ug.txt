@@ -33,10 +33,10 @@ VSVersionInfo(
         [StringStruct(u'CompanyName', u''),
         StringStruct(u'FileDescription', u'V-dlp UG: create a list of Vimm URLs'),
         StringStruct(u'FileVersion', u'2026.3.24.0'),
-        StringStruct(u'InternalName', u'V-dlp UG'),
+        StringStruct(u'InternalName', u'V-dlpUG'),
         StringStruct(u'LegalCopyright', u'© iamdoubz'),
-        StringStruct(u'OriginalFilename', u'V-dlp UG.exe'),
-        StringStruct(u'ProductName', u'V-dlp'),
+        StringStruct(u'OriginalFilename', u'V-dlpUG.exe'),
+        StringStruct(u'ProductName', u'V-dlpUG'),
         StringStruct(u'ProductVersion', u'2026.3.24.0')])
       ]), 
     VarFileInfo([VarStruct(u'Translation', [1033, 1200])])
