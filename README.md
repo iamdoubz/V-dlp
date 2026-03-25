@@ -55,32 +55,33 @@ V-dlp will parse a file and attempt to download each one at a time.
 | -tw | Number of seconds to pause between downloads | float | 4 |
 | -nm | Do not monitor download statistics (set flag to True for small downloads <32MB) | boolean | False |
 | -uh | Use headless Chrome (If you do not want to use, do not pass in the flag) | boolean | False |
+| -gc | Download cover image (0: don't download, 1: small, 2: large, 3: both) | int | 0 |
 | -v | Display version information | NA | none |
 
 ## Features
 
 - [X] Download files
+- [X] Handle multi-disc downloads
+- [X] Download box cover art
 - [X] Show download statistics (speed, ETA)
+- [X] More download statistics
 - [X] Show number of URLs
 - [X] Show download name/size
 - [X] Add headless option
+- [X] Show failed downloads
+- [X] Remove duplicate URLs
+- [X] Get all links (#, A-Z)
 - [X] No more waiting for each download to finish
-
 
 ## Upcoming features
 
 - [ ] Proper error handling
-- [ ] Show failed downloads
-- [ ] Download cover art
 - [ ] Download manuals
-- [ ] Remove duplicate URLs
 - [ ] Email upon completion
-- [ ] More download statistics
-- [ ] Handle multi-disc downloads
 - [ ] Remove dependency on external start of Chrome Driver
 - [ ] Click on ads
 - [ ] OS agnostic (heavily Windows based as they need the most hand holding)
-- [ ] Get # links
+
 
 ## Bonus
 
