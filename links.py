@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 import string
 import sys
 
-__version__ = "2026.3.24.0"
+__version__ = "2026.3.25.0"
 
 # Helper for logging
 def setup_logging(mode="syslog", logfile=None):
@@ -98,7 +98,10 @@ def main():
     
     # Function to read platform/letter and write links to file
     def get_links(pf, lets):
-        driver.get(f"https://vimm.net/vault/{pf}/{lets}")
+        if lets in string.ascii_uppercase:
+            driver.get(f"https://vimm.net/vault/{pf}/{lets}")
+        else:
+            driver.get(f"https://vimm.net/vault/{lets}")
         data = []
         # Locate the main table
         table = driver.find_element(By.CSS_SELECTOR, "table.rounded")
@@ -149,8 +152,12 @@ def main():
             
 
     if letter == 'ALL':
+        big_list = []
+        big_list.append({"platform": platform, "letter": f"?p=list&system={platform}&section=number"})
         for l in string.ascii_uppercase:
-            get_links(platform, l)
+            big_list.append({"platform": platform, "letter": l})
+        for a in big_list:
+            get_links(a['platform'], a['letter'])
     else:
         get_links(platform, letter)
 
