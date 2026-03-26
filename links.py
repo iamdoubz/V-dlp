@@ -7,7 +7,7 @@ from selenium.webdriver.chrome.options import Options
 import string
 import sys
 
-__version__ = "2026.3.25.0"
+__version__ = "2026.3.26.0"
 
 # Helper for logging
 def setup_logging(mode="syslog", logfile=None):
@@ -91,10 +91,7 @@ def main():
         chrome_options.add_argument("--no-sandbox")
         chrome_options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Remote(
-        command_executor=f"http://127.0.0.1:{chrome_port}",
-        options=chrome_options
-    )
+    driver = webdriver.Chrome(options=chrome_options)
     
     # Function to read platform/letter and write links to file
     def get_links(pf, lets):
