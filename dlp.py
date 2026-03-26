@@ -3,6 +3,7 @@ import glob
 import logging
 import os
 from pathlib import Path
+from pathvalidate import sanitize_filename
 import random
 import requests
 from selenium import webdriver
@@ -16,7 +17,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import sys
 import time
 
-__version__ = "2026.3.25.0"
+__version__ = "2026.3.26.0"
 
 # Helper for logging
 def setup_logging(mode="syslog", logfile=None):
@@ -122,11 +123,7 @@ def main():
         chrome_options.add_experimental_option("prefs", prefs)
 
     driver = webdriver.Chrome(options=chrome_options)
-    #driver = webdriver.Chrome(service=Service(r"C:\Tools\Standalone\chromedriver.exe"), options=chrome_options)
-    #driver = webdriver.Remote(
-    #    command_executor=f"http://127.0.0.1:{chrome_port}",
-    #    options=chrome_options
-    #)
+
     if headless == True:
         # Chrome sometimes blocks downloads in headless mode
         driver.execute_cdp_cmd(
@@ -203,12 +200,14 @@ def main():
                     response.raise_for_status()
                     if response.status_code == 200:
                         fext = 'avif'
+                        ftitle = sanitize_filename(title)
                         if iform == 2:
                             fext = 'webp'
-                        save_path = os.path.join(download_dir, f"{title}.{fext}")
+                        save_path = os.path.join(f"{download_dir}", f"{ftitle}.{fext}")
                         with open(save_path, 'wb') as file:
                             for chunk in response.iter_content(1024):
                                 file.write(chunk)
+                        time.sleep(1)
                     else:
                         logging.warning(f"Could not download box image: {response.status_code} - {response.reason}")
                         pass
@@ -237,6 +236,7 @@ def main():
                                 logging.warning("No large box image found.")
                             actions = ActionChains(driver)
                             actions.move_to_element_with_offset(body_element, random.randint(1, 100), random.randint(1, 100)).click().perform()
+                            time.sleep(1)
                         except Exception as e:
                             logging.warning(f"No large box image found! {e}")
                 except:
