@@ -10,12 +10,15 @@ A program to aid in queuing downloads from Vimm.net
 ### Shared
 
 - [Google Chrome](https://www.google.com/chrome/)
-- [Chromedriver](https://googlechromelabs.github.io/chrome-for-testing/)
+- ~~[Chromedriver](https://googlechromelabs.github.io/chrome-for-testing/)~~
 
 ### Source
 
 - Python 3.11 (others might work)
 - Selenium `pip install selenium`
+- Results `pip install results`
+- Pathlib ` pip install pathlib`
+- Pathvalidate `pip install pathvalidate`
 
 ## Programs
 
@@ -68,6 +71,7 @@ V-dlp will parse a file and attempt to download each one at a time.
 - [X] Show number of URLs
 - [X] Show download name/size
 - [X] Add headless option
+- [X] Remove dependency of Chrome Driver
 - [X] Show failed downloads
 - [X] Remove duplicate URLs
 - [X] Get all links (#, A-Z)
@@ -78,7 +82,6 @@ V-dlp will parse a file and attempt to download each one at a time.
 - [ ] Proper error handling
 - [ ] Download manuals
 - [ ] Email upon completion
-- [ ] Remove dependency on external start of Chrome Driver
 - [ ] Click on ads
 - [ ] OS agnostic (heavily Windows based as they need the most hand holding)
 
