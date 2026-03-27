@@ -17,7 +17,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import sys
 import time
 
-__version__ = "2026.3.26.0"
+__version__ = "2026.3.27.0"
 
 # Helper for logging
 def setup_logging(mode="syslog", logfile=None):
@@ -55,7 +55,6 @@ def main():
     parser.add_argument("-lf", help="If log is file/all need to specify file to log to")
     parser.add_argument("-d", type=str, help="Download directory to use", default=f"{Path.home() / 'Downloads'}")
     parser.add_argument("-u", type=str, help="File with links inside", default="urls.txt")
-    parser.add_argument("-p", type=float, help="Specify already running Chrome Driver port", default=54321)
     parser.add_argument("-uh", type=bool, help="Use headless Chrome", default=False)
     parser.add_argument("-tl", type=float, help="How long to wait for webpage to load before timeout", default=10)
     parser.add_argument("-r", type=float, help="How often to refresh statistics on screen", default=2)
@@ -72,7 +71,6 @@ def main():
 
     download_dir = args.d
     url_file = args.u
-    chrome_port = args.p
     headless = args.uh
     page_load_time = args.tl
     refresh_rate = args.r
@@ -82,7 +80,6 @@ def main():
     
     logging.info(f"Download Directory: {download_dir}")
     logging.info(f"Reading URLs from: {url_file}")
-    logging.info(f"Using ChromeD Port: {chrome_port}")
 
     emessage = f""
     # URLs to process
@@ -290,11 +287,29 @@ def main():
             argwait = wait_time
             ctime = 0
             csize = 0
+            if size > 33554431 and monitor:
+                monitor = False
             if size < 33554432:
                 monitor = True
                 wait_time = 15
-                if total_size > 0 and total_time > 0:
-                    wait_time = min((size / total_size / total_time) * 1.25, wait_time)
+                if size < 2097152 * 10:
+                    wait_time = 10
+                if size < 2097152 * 8:
+                    wait_time = 8
+                if size < 2097152 * 7:
+                    wait_time = 7
+                if size < 2097152 * 6:
+                    wait_time = 6
+                if size < 2097152 * 5:
+                    wait_time = 5
+                if size < 2097152 * 4:
+                    wait_time = 4
+                if size < 2097152 * 3:
+                    wait_time = 3
+                if size < 2097152 * 2:
+                    wait_time = 2
+                if size < 2097152:
+                    wait_time = 1
             if monitor == False:
                 tempTime = time.time()
                 file_pattern = download_dir + '/*.crdownload'
