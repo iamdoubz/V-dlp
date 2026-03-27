@@ -105,3 +105,7 @@ python dlp.py -nm True -uh True -tw 1 -u atari26roms.txt
 ```
 
 **NOTE**: if you are using the release, substitute "V-dlp" for "python dlp.py".
+
+## Why was this created?
+
+iamdoubz wanted to learn how to use python, selenium, and get data from a website. iamdoubz did not know where to start and generated a few lines of code using AI, then added the rest using StackOverflow and Google.
